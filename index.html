@@ -13,7 +13,6 @@
   <main class="shell">
     <header class="topbar">
       <div class="brand">
-        <!-- Minimal heart logo (SVG) -->
         <svg class="logo" width="28" height="28" viewBox="0 0 48 48" aria-hidden="true">
           <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stop-color="#7a83ff"/><stop offset="1" stop-color="#5060ff"/>
@@ -26,7 +25,7 @@
       <a class="install-tip" href="#" onclick="installPWA();return false;">安裝到手機</a>
     </header>
 
-    <section class="card">
+    <section class="card elevated">
       <div class="row">
         <label for="mood">今天心情如何？</label>
         <select id="mood" class="select">
@@ -36,6 +35,21 @@
         </select>
         <input type="text" id="note" class="input" placeholder="寫一句話備註…" />
         <button id="saveBtn" class="btn">記錄</button>
+      </div>
+      <div class="toolbar">
+        <div class="filter">
+          <label>顯示最近</label>
+          <select id="rangeSelect" class="select small">
+            <option value="7">7筆</option>
+            <option value="14">14筆</option>
+            <option value="30">30筆</option>
+            <option value="all">全部</option>
+          </select>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="exportBtn" title="匯出CSV">匯出CSV</button>
+          <button class="btn danger" id="clearAllBtn" title="清空所有記錄">清除全部</button>
+        </div>
       </div>
     </section>
 
@@ -50,9 +64,9 @@
     </section>
 
     <section class="card">
-      <div class="card-title">
-        <span class="emoji">📝</span>
-        <h2>記錄</h2>
+      <div class="card-title with-count">
+        <div class="left"><span class="emoji">📝</span><h2>記錄</h2></div>
+        <span id="countBadge" class="badge">0</span>
       </div>
       <div id="history" class="history"></div>
     </section>
@@ -63,17 +77,15 @@
   </main>
 
   <script>
-    // PWA install hook
     let deferredPrompt;
     window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
     function installPWA(){ if(deferredPrompt){ deferredPrompt.prompt(); } }
 
-    // 註冊 Service Worker
     if ('serviceWorker' in navigator) { window.addEventListener('load', () => {
       navigator.serviceWorker.register('./sw.js').catch(console.error);
     }); }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
