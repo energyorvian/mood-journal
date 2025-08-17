@@ -1,93 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mood Journal</title>
-  <meta name="theme-color" content="#5b67ff"/>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <main class="shell">
-    <header class="topbar">
-      <div class="brand">
-        <svg class="logo" width="28" height="28" viewBox="0 0 48 48" aria-hidden="true">
-          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#7a83ff"/><stop offset="1" stop-color="#5060ff"/>
-          </linearGradient></defs>
-          <rect x="0" y="0" width="48" height="48" rx="12" fill="url(#g)"></rect>
-          <path d="M24 33c9-7 12-11 12-15a7 7 0 0 0-12-4 7 7 0 0 0-12 4c0 4 3 8 12 15z" fill="#fff"/>
-        </svg>
-        <h1 class="title">Mood Journal</h1>
-      </div>
-      <a class="install-tip" href="#" onclick="installPWA();return false;">安裝到手機</a>
-    </header>
+  <section class="card elevated">
+    <h2>心情記錄</h2>
+    <textarea id="moodInput" placeholder="輸入今天的心情..."></textarea>
+    <button id="saveBtn" class="btn">記錄</button>
+  </section>
 
-    <section class="card elevated">
-      <div class="row">
-        <label for="mood">今天心情如何？</label>
-        <select id="mood" class="select">
-          <option value="3">🙂 開心</option>
-          <option value="2">😐 普通</option>
-          <option value="1">🙁 難過</option>
-        </select>
-        <input type="text" id="note" class="input" placeholder="寫一句話備註…" />
-        <!-- 移除 inline onclick，避免雙觸發 -->
-        <button id="saveBtn" class="btn">記錄</button>
-      </div>
-      <div class="toolbar">
-        <div class="filter">
-          <label>顯示最近</label>
-          <select id="rangeSelect" class="select small">
-            <option value="7">7筆</option>
-            <option value="14">14筆</option>
-            <option value="30">30筆</option>
-            <option value="all">全部</option>
-          </select>
-        </div>
-        <div class="actions">
-          <button class="btn ghost" id="exportBtn" title="匯出CSV">匯出CSV</button>
-          <button class="btn danger" id="clearAllBtn" title="清空所有記錄">清除全部</button>
-        </div>
-      </div>
-    </section>
+  <!-- 每日提示語 -->
+  <section class="card" style="margin-top:10px">
+    <div id="daily-quote-root"></div>
+  </section>
 
-    <section class="card">
-      <div class="card-title">
-        <span class="emoji">🗓️</span>
-        <h2>本週心情（含時間）</h2>
-      </div>
-      <div class="chart-wrap">
-        <canvas id="moodChart"></canvas>
-      </div>
-      <div id="chartHint" class="hint" style="display:none">（提示：如果看不到圖表，請確認網路是否能載入 Chart.js，或重新整理一次頁面）</div>
-    </section>
-
-    <section class="card">
-      <div class="card-title with-count">
-        <div class="left"><span class="emoji">📝</span><h2>記錄</h2></div>
-        <span id="countBadge" class="badge">0</span>
-      </div>
-      <div id="history" class="history"></div>
-    </section>
-
-    <footer class="footer">
-      <small>PWA 已啟用：可離線使用、支援「加入主畫面」。</small>
-    </footer>
-  </main>
-
-  <script>
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
-    function installPWA(){ if(deferredPrompt){ deferredPrompt.prompt(); } }
-
-    if ('serviceWorker' in navigator) { window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch(console.error);
-    }); }
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="app.js?v=6.1"></script>
+  <script src="app.js"></script>
+  <script src="daily-quote.vanilla.js?v=1"></script>
 </body>
 </html>
