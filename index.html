@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mood Journal</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#6c63ff"/>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="app-container">
@@ -16,16 +19,30 @@
         <option value="2">😐 普通</option>
         <option value="1">😞 難過</option>
       </select>
-      <input type="text" id="note" placeholder="寫一句話備註...">
-      <button onclick="saveMood()">記錄</button>
+      <input type="text" id="note" placeholder="寫一句話備註..." />
+      <button id="saveBtn">記錄</button>
     </div>
 
     <h2>📅 本週心情</h2>
-    <canvas id="moodChart"></canvas>
+    <div class="chart-wrap">
+      <canvas id="moodChart"></canvas>
+    </div>
 
     <div id="history"></div>
+    <p class="pwa-tip">PWA: 可離線使用，支援「加入主畫面」。</p>
   </div>
+
+  <script>
+    // 註冊 Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(console.error);
+      });
+    }
+  </script>
+  <!-- 先載入 Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="app.js"></script>
+  <!-- 主程式 -->
+  <script src="app.js?v=2"></script>
 </body>
 </html>
