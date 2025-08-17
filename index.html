@@ -4,35 +4,80 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mood Journal</title>
-  <meta name="theme-color" content="#6c63ff"/>
+  <meta name="theme-color" content="#5b67ff"/>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app-container">
-    <h1>🌙 Mood Journal</h1>
-    <div class="input-section">
-      <label>今天心情如何？</label>
-      <select id="mood">
-        <option value="3">😀 開心</option>
-        <option value="2">😐 普通</option>
-        <option value="1">😞 難過</option>
-      </select>
-      <input type="text" id="note" placeholder="寫一句話備註..." />
-      <button id="saveBtn">記錄</button>
-    </div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <!-- Minimalist smile mark (no moon) -->
+        <svg class="logo" width="28" height="28" viewBox="0 0 48 48" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#7a83ff"/>
+              <stop offset="1" stop-color="#5060ff"/>
+            </linearGradient>
+          </defs>
+          <circle cx="24" cy="24" r="22" fill="url(#g)"></circle>
+          <circle cx="17" cy="20" r="2" fill="#fff"></circle>
+          <circle cx="31" cy="20" r="2" fill="#fff"></circle>
+          <path d="M14 28c3 5 17 5 20 0" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </svg>
+        <h1 class="title">Mood Journal</h1>
+      </div>
+      <a class="install-tip" href="#" onclick="installPWA();return false;">安裝到手機</a>
+    </header>
 
-    <h2>📅 本週心情</h2>
-    <div class="chart-wrap">
-      <canvas id="moodChart"></canvas>
-    </div>
+    <section class="card">
+      <div class="row">
+        <label for="mood">今天心情如何？</label>
+        <select id="mood" class="select">
+          <option value="3">🙂 開心</option>
+          <option value="2">😐 普通</option>
+          <option value="1">🙁 難過</option>
+        </select>
+        <input type="text" id="note" class="input" placeholder="寫一句話備註…" />
+        <button id="saveBtn" class="btn">記錄</button>
+      </div>
+    </section>
 
-    <div id="history"></div>
-    <p class="pwa-tip">PWA: 可離線使用，支援「加入主畫面」。</p>
-  </div>
+    <section class="card">
+      <div class="card-title">
+        <span class="emoji">🗓️</span>
+        <h2>本週心情</h2>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="moodChart"></canvas>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-title">
+        <span class="emoji">📝</span>
+        <h2>記錄</h2>
+      </div>
+      <div id="history" class="history"></div>
+    </section>
+
+    <footer class="footer">
+      <small>PWA 已啟用：可離線使用、支援「加入主畫面」。</small>
+    </footer>
+  </main>
 
   <script>
+    // PWA install hook
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+    function installPWA(){
+      if(deferredPrompt){ deferredPrompt.prompt(); }
+    }
+
     // 註冊 Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -40,9 +85,7 @@
       });
     }
   </script>
-  <!-- 先載入 Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- 主程式 -->
-  <script src="app.js?v=2"></script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
