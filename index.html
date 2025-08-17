@@ -1,24 +1,56 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mood Journal</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <section class="card elevated">
-    <h2>心情記錄</h2>
-    <textarea id="moodInput" placeholder="輸入今天的心情..."></textarea>
-    <button id="saveBtn" class="btn">記錄</button>
-  </section>
+  <div class="app-container">
+    <header>
+      <h1>💜 Mood Journal</h1>
+      <button id="installBtn" hidden>安裝到手機</button>
+    </header>
 
-  <!-- 每日提示語 -->
-  <section class="card" style="margin-top:10px">
-    <div id="daily-quote-root"></div>
-  </section>
+    <section class="input-section">
+      <label for="mood">今天心情如何？</label>
+      <select id="mood">
+        <option value="1">😞 難過</option>
+        <option value="2">😐 普通</option>
+        <option value="3">😊 開心</option>
+      </select>
+      <input type="text" id="note" placeholder="寫一句話備註…" />
+      <button id="saveBtn">記錄</button>
+      <button id="exportBtn">匯出CSV</button>
+      <button id="clearBtn" class="danger">清除全部</button>
+    </section>
+
+    <section id="quote-section">
+      <h2>每日一句</h2>
+      <p id="quote"></p>
+      <div class="quote-actions">
+        <button id="newQuote">換一句</button>
+        <button id="saveQuote">收藏</button>
+        <button id="shareQuote">分享</button>
+      </div>
+      <ul id="savedQuotes"></ul>
+    </section>
+
+    <section class="chart-section">
+      <h2>📅 本週心情（含時間）</h2>
+      <canvas id="moodChart"></canvas>
+    </section>
+
+    <section class="records-section">
+      <h2>📝 記錄</h2>
+      <div id="records"></div>
+    </section>
+  </div>
 
   <script src="app.js"></script>
-  <script src="daily-quote.vanilla.js?v=1"></script>
+  <script src="daily-quote.vanilla.js"></script>
 </body>
 </html>

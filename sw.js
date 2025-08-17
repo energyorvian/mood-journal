@@ -1,1 +1,13 @@
-const CACHE_NAME='mood-journal-v6-1';const ASSETS=['./','./index.html','./styles.css','./app.js?v=6.1','https://cdn.jsdelivr.net/npm/chart.js'];self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(ASSETS)));self.skipWaiting();});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))));self.clients.claim();});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(r=>{const cp=r.clone();caches.open(CACHE_NAME).then(c=>c.put(e.request,cp));return r;}).catch(()=>caches.match('./index.html'))));});
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open('mood-journal-v7').then(cache => {
+      return cache.addAll(['/', '/index.html', '/styles.css', '/app.js', '/daily-quote.vanilla.js']);
+    })
+  );
+});
+
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(resp => resp || fetch(e.request))
+  );
+});

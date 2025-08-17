@@ -1,10 +1,10 @@
 {
   "name": "Mood Journal",
-  "short_name": "Mood",
+  "short_name": "MoodJournal",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#5b67ff",
+  "description": "簡單的心情日記應用",
   "icons": [
     {
       "src": "icons/icon-192.png",
