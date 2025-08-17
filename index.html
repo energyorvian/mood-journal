@@ -34,7 +34,7 @@
           <option value="1">🙁 難過</option>
         </select>
         <input type="text" id="note" class="input" placeholder="寫一句話備註…" />
-        <button id="saveBtn" class="btn">記錄</button>
+        <button id="saveBtn" class="btn" onclick="saveMood()">記錄</button>
       </div>
       <div class="toolbar">
         <div class="filter">
@@ -61,6 +61,7 @@
       <div class="chart-wrap">
         <canvas id="moodChart"></canvas>
       </div>
+      <div id="chartHint" class="hint" style="display:none">（提示：如果看不到圖表，請確認網路是否能載入 Chart.js，或重新整理一次頁面）</div>
     </section>
 
     <section class="card">
@@ -86,6 +87,6 @@
     }); }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>
