@@ -34,7 +34,8 @@
           <option value="1">🙁 難過</option>
         </select>
         <input type="text" id="note" class="input" placeholder="寫一句話備註…" />
-        <button id="saveBtn" class="btn" onclick="saveMood()">記錄</button>
+        <!-- 移除 inline onclick，避免雙觸發 -->
+        <button id="saveBtn" class="btn">記錄</button>
       </div>
       <div class="toolbar">
         <div class="filter">
@@ -87,6 +88,6 @@
     }); }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=6.1"></script>
 </body>
 </html>
