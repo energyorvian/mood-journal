@@ -1,20 +1,13 @@
 :root{
-  --bg:#f4f6fb;
-  --card:#ffffff;
-  --ink:#1f2739;
-  --muted:#7a8599;
-  --brand:#5b67ff;
-  --brand-2:#5060ff;
-  --radius:16px;
-  --shadow:0 10px 24px rgba(31,39,57,.08);
+  --bg:#f4f6fb; --card:#ffffff; --ink:#1f2739; --muted:#7a8599;
+  --brand:#5b67ff; --brand-2:#5060ff; --radius:16px; --shadow:0 10px 24px rgba(31,39,57,.08);
 }
-
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family: ui-sans-serif, system-ui, 'Microsoft JhengHei', Segoe UI, Arial, sans-serif;}
 .shell{max-width:840px;margin:28px auto; padding:0 18px;}
 .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 .brand{display:flex;align-items:center;gap:10px}
-.logo{flex:0 0 auto;filter: drop-shadow(0 6px 14px rgba(91,103,255,.35));border-radius:50%}
+.logo{flex:0 0 auto;filter: drop-shadow(0 6px 14px rgba(91,103,255,.35));border-radius:12px}
 .title{font-size:28px;letter-spacing:.3px;margin:0}
 .install-tip{font-size:14px;text-decoration:none;padding:8px 12px;border-radius:999px;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;box-shadow: var(--shadow)}
 
@@ -24,9 +17,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family: 
 .emoji{font-size:20px}
 
 .row{display:grid;grid-template-columns: auto 150px 1fr auto;gap:10px;align-items:center}
-@media (max-width:720px){
-  .row{grid-template-columns: 1fr;gap:8px}
-}
+@media (max-width:720px){ .row{grid-template-columns: 1fr;gap:8px} }
 
 .select,.input{height:40px;border:1px solid #e6e8f0;border-radius:10px;padding:0 12px;outline:none}
 .select:focus,.input:focus{border-color:var(--brand)}
@@ -34,7 +25,7 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family: 
 .btn{height:40px;padding:0 16px;border:none;border-radius:10px;background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;cursor:pointer;box-shadow: var(--shadow);}
 .btn:hover{filter:brightness(1.05)}
 
-.chart-wrap{width:100%;height:280px;position:relative}
+.chart-wrap{width:100%;height:300px;position:relative}
 
 .history p{margin:6px 0;padding:8px 10px;border:1px dashed #e6e8f0;border-radius:10px;color:var(--muted)} 
 
